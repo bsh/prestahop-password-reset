@@ -1,0 +1,1 @@
+# prestahop-password-reset
