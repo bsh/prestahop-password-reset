@@ -24,13 +24,18 @@
             }
 
             if (isset($_POST['email']) && isset($_POST['password']) && $_POST['email'] != '' && $_POST['password'] != '') {
-                $query = Db::getInstance()->Execute('UPDATE ' . _DB_PREFIX_ . 'employee SET passwd = "' . md5(PSQL(_COOKIE_KEY_ . $_POST['password'])) . '" WHERE email = "' . PSQL($_POST['email']) . '" LIMIT 1');
-                if (!$query) {
-                    echo '<div class="alert alert-danger"><strong>Error: </strong> Mysql error.</div>';
-                    die();
-                } else {
-                    echo '<div class="alert alert-success">Done. Don\'t forgete to <a href="?delete">delete</a> this script.</div>';
-                }
+                $sql = 'SELECT id_employee FROM ' . _DB_PREFIX_ . 'employee where email = "' . PSQL($_POST['email']) . '" LIMIT 1';
+                if ($results = Db::getInstance()->ExecuteS($sql)) {
+                    if (isset($results[0]['id_employee']) && $results[0]['id_employee'] != '') {
+                        $query = Db::getInstance()->Execute('UPDATE ' . _DB_PREFIX_ . 'employee SET passwd = "' . md5(PSQL(_COOKIE_KEY_ . $_POST['password'])) . '" WHERE email = "' . PSQL($_POST['email']) . '" LIMIT 1');
+                        if (!$query) {
+                            echo '<div class="alert alert-danger"><strong>Error: </strong> Mysql error.</div>';
+                            die();
+                        } else {
+                            echo '<div class="alert alert-success">Done. Don\'t forgete to <a href="?delete">delete</a> this script.</div>';
+                        }
+                    } else echo '<div class="alert alert-danger"><strong>Error: </strong> E-mail not found.</div>';
+                } else echo '<div class="alert alert-danger"><strong>Error: </strong> E-mail not found.</div>';
             } else if (isset($_GET['delete'])) {
                 unlink(__FILE__);
                 echo '<div class="alert alert-success">Done. File deleted.</div>';
