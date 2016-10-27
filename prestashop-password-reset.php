@@ -8,7 +8,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>Prestashop password reset</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Created by Laszlo Kovacs. Latest version: https://github.com/bsh/prestahop-password-reset -->
+    <!-- Created by Laszlo Kovacs. Latest version: https://github.com/bsh/prestashop-password-reset -->
 </head>
 <body>
 <div class="container">
